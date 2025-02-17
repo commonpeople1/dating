@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Dating.Domain
 {
-    public partial class Customer: BaseEntity
+    public partial class Customer : BaseEntity
     {
-        
+
         public new int Id { get; set; }
         public string CustomerNo { get; set; }
         public string CustomerName { get; set; }
@@ -26,10 +26,10 @@ namespace Dating.Domain
         public string BankName { get; set; }
         public string Ein { get; set; }
         public string CustomerNote { get; set; }
-        public string OwnerWorkerNo { get; set; }
-        public string OwnerWorkerName { get; set; }
-        public string OwnerWorkerTel { get; set; }
-        public string OpenId { get; set; }
-        public string HeadImgUrl { get; set; }
+        public string? OwnerWorkerNo { get; set; }
+        public string? OwnerWorkerName { get; set; }
+        public string? OwnerWorkerTel { get; set; }
+        public string? OpenId { get; set; }
+        public string? HeadImgUrl { get; set; }
     }
 }

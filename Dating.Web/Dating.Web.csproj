@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Dating. Core\Dating. Core.csproj" />
     <ProjectReference Include="..\Dating.Service\Dating.Service.csproj" />
+    <ProjectReference Include="..\Dating.Common\Dating.Common.csproj" />
   </ItemGroup>
 
 </Project>

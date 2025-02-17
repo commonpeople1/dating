@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Dating._Core.Core;
@@ -10,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Dating._Core.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity>
-    where TEntity : BaseEntity
+    where TEntity : class
 
     {
         private readonly DatingDbContext _context;
@@ -20,55 +21,101 @@ namespace Dating._Core.Repository
         }
         public List<TEntity> GetList()
         {
-            return _context.Set<TEntity>().ToList();
+            var dbSet = _context.Set<TEntity>();
+            return dbSet.ToList();
         }
         public List<TEntity> GetList(Func<TEntity, bool> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate).ToList();
+            var dbSet = _context.Set<TEntity>();
+            return dbSet.Where(predicate).ToList();
         }
-        public async Task<List<TEntity>> GetListAsync()
+        // public async Task<List<TEntity>> GetListAsync(PageWithSortDto pageWithSortDto)
+        // {
+        //     int skip = (pageWithSortDto.PageIndex - 1) * pageWithSortDto.PageSize;
+        //     var dbSet = _context.Set<TEntity>();
+        //     if (pageWithSortDto.OrderType == OrderType.Asc)
+        //         return await dbSet.OrderBy(pageWithSortDto.Sort).Skip(skip).Take(pageWithSortDto.PageSize).ToListAsync();
+        //     else
+        //         return await dbSet.OrderByDescending(pageWithSortDto.Sort).Skip(skip).Take(pageWithSortDto.PageSize).ToListAsync();
+
+        // }
+        public IQueryable<TEntity> GetQueryable()
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            var dbSet = _context.Set<TEntity>();
+            return dbSet;
         }
-        public async Task<List<TEntity>> GetListAsync(Func<TEntity, bool> predicate)
+        public Task<List<TEntity>> GetListAsync()
         {
-            return await _context.Set<TEntity>().Where(predicate).AsQueryable().ToListAsync();
+            var dbSet = _context.Set<TEntity>();
+            return dbSet.ToListAsync();
+        }
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            var dbSet = _context.Set<TEntity>();
+            return await dbSet.Where(predicate).ToListAsync();
+        }
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, string sort, int pageIndex, int pageSize)
+        {
+            int skip = (pageIndex - 1) * pageSize;
+            var dbSet = _context.Set<TEntity>();
+            return await dbSet.Where(predicate).OrderBy(m => sort).Skip(skip).Take(pageSize).ToListAsync();
         }
 
-        public bool Add(TEntity entity)
+        public TEntity Get(Func<TEntity, bool> predicate)
         {
-            _context.Set<TEntity>().Add(entity);
-            return _context.SaveChanges() > 0;
+            var dbSet = _context.Set<TEntity>();
+            return dbSet.FirstOrDefault(predicate);
+        }
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            var dbSet = _context.Set<TEntity>();
+            return await dbSet.FirstOrDefaultAsync(predicate);
+        }
+        public TEntity Insert(TEntity entity)
+        {
+            var dbSet = _context.Set<TEntity>();
+            var res = dbSet.Add(entity).Entity;
+            _context.SaveChanges();
+            return res;
+        }
+        public async Task<TEntity> InsertAsync(TEntity entity)
+        {
+            var dbSet = _context.Set<TEntity>();
+            var res = (await dbSet.AddAsync(entity)).Entity;
+            await _context.SaveChangesAsync();
+            return res;
+        }
+        public TEntity Delete(TEntity entity)
+        {
+            var dbSet = _context.Set<TEntity>();
+            var res = dbSet.Remove(entity).Entity;
+            _context.SaveChanges();
+            return res;
+        }
+        public async Task<TEntity> DeleteAsync(TEntity entity)
+        {
+            var dbSet = _context.Set<TEntity>();
+            var res = dbSet.Remove(entity).Entity;
+            await _context.SaveChangesAsync();
+            return res;
+        }
+        public TEntity Update(TEntity entity)
+        {
+            // _context.Entry<TEntity>(entity).Property("Id").IsModified = false;
+            var dbSet = _context.Set<TEntity>();
+            var res = dbSet.Update(entity).Entity;
+            _context.SaveChanges();
+            return res;
+        }
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            // _context.Entry<TEntity>(entity).Property("Id").IsModified = false;
+            var dbSet = _context.Set<TEntity>();
+            var res = dbSet.Update(entity).Entity;
+            await _context.SaveChangesAsync();
+            return res;
         }
 
-        public async Task<bool> AddAsync(TEntity entity)
-        {
-            await _context.Set<TEntity>().AddAsync(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }
 
-        public bool Update(TEntity entity)
-        {
-            _context.Set<TEntity>().Update(entity);
-            return _context.SaveChanges() > 0;
-        }
-
-        public async Task<bool> UpdateAsync(TEntity entity)
-        {
-            _context.Set<TEntity>().Update(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }
-
-        public bool Delete(TEntity entity)
-        {
-            _context.Set<TEntity>().Remove(entity);
-            return _context.SaveChanges() > 0;
-        }
-
-        public async Task<bool> DeleteAsync(TEntity entity)
-        {
-            _context.Set<TEntity>().Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }
     }
 }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Domain", "Dating.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Service", "Dating.Service\Dating.Service.csproj", "{73B2B310-69A2-428D-AEF0-4ED2D0CCEA1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Common", "Dating.Common\Dating.Common.csproj", "{F770F9CD-BF30-4132-856F-C471CA7FA46F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{73B2B310-69A2-428D-AEF0-4ED2D0CCEA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73B2B310-69A2-428D-AEF0-4ED2D0CCEA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73B2B310-69A2-428D-AEF0-4ED2D0CCEA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

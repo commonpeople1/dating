@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dating.Web.Model
+namespace Dating.Common.TokenModule.Model
 {
     public class JwtTokenModel
     {
@@ -12,8 +12,8 @@ namespace Dating.Web.Model
         public int Expires { get; set; }
         public string Security { get; set; }
         public int Id { get; set; }
-        public string UserNumber { get; set; }
-        public string UserName { get; set; }
+        public string CustomerNo { get; set; }
+        public string CustomerName { get; set; }
 
     }
 }
