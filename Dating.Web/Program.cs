@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Dating._Core.Core;
-using Dating._Core.Repository;
+using Dating.Core.Core;
+using Dating.Core.Repository;
 using Dating.Service.CustomerApp;
-
+using Dating.Extension;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +12,8 @@ builder.Services.AddDbContext<DatingDbContext>(options =>
 });
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.RepositoryRegister();
+//builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 var app = builder.Build();
 

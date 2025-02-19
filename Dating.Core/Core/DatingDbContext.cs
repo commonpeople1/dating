@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 
 using Microsoft.EntityFrameworkCore;
 using Dating.Domain;
-namespace Dating._Core.Core
+namespace Dating.Core.Core
 {
     public class DatingDbContext : DbContext
     {
-         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerInvoice> CustomerInvoices { get; set; }
         public virtual DbSet<CustomerPwd> CustomerPwds { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
@@ -526,7 +526,7 @@ namespace Dating._Core.Core
                 entity.Property(e => e.StepTime).HasColumnType("datetime");
             });
 
-           
+
             modelBuilder.Entity<ShoppingCart>(entity =>
             {
                 entity.HasKey(e => e.CartGuid)
@@ -616,7 +616,7 @@ namespace Dating._Core.Core
             base.OnConfiguring(optionsBuilder);
             if (!optionsBuilder.IsConfigured)
             {
-                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=DealerPlatform;Trusted_Connection=True;TrustServerCertificate=True;");
             }
         }

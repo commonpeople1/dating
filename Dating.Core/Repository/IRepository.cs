@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Dating.Domain;
 
-namespace Dating._Core.Repository
+namespace Dating.Core.Repository
 {
     public interface IRepository<TEntity> where TEntity : class
     {

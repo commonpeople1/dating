@@ -1,9 +1,10 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Dating._Core.Migrations
+namespace Dating.Core.Migrations
 {
     /// <inheritdoc />
     public partial class INIT : Migration

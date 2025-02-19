@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Dating._Core.Repository;
+using Dating.Core.Repository;
 using Dating.Domain;
 using Dating.Service.CustomerApp.Dto;
 using Dating.Common.Md5Module;

@@ -5,13 +5,15 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Web", "Dating.Web\Dating.Web.csproj", "{08ADE7D7-912D-488B-A867-498624CF6DE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating. Core", "Dating. Core\Dating. Core.csproj", "{E874B924-ADBE-4D08-B43C-84647F971879}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Core", "Dating.Core\Dating.Core.csproj", "{E874B924-ADBE-4D08-B43C-84647F971879}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Domain", "Dating.Domain\Dating.Domain.csproj", "{E974F28D-FB67-4ABF-8EE5-89258607ECB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Service", "Dating.Service\Dating.Service.csproj", "{73B2B310-69A2-428D-AEF0-4ED2D0CCEA1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Common", "Dating.Common\Dating.Common.csproj", "{F770F9CD-BF30-4132-856F-C471CA7FA46F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dating.Extension", "Dating.Extension\Dating.Extension.csproj", "{1D4F04B7-7F06-4407-B9FE-DAE2DBE4FDE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +44,9 @@ Global
 		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F770F9CD-BF30-4132-856F-C471CA7FA46F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D4F04B7-7F06-4407-B9FE-DAE2DBE4FDE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D4F04B7-7F06-4407-B9FE-DAE2DBE4FDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D4F04B7-7F06-4407-B9FE-DAE2DBE4FDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D4F04B7-7F06-4407-B9FE-DAE2DBE4FDE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

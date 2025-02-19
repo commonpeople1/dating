@@ -4,11 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-using Dating._Core.Core;
+using Dating.Core.Core;
 using Dating.Domain;
 
 using Microsoft.EntityFrameworkCore;
-namespace Dating._Core.Repository
+namespace Dating.Core.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity>
     where TEntity : class

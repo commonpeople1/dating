@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Dating. Core\Dating. Core.csproj" />
+    <ProjectReference Include="..\Dating.Core\Dating.Core.csproj" />
     <ProjectReference Include="..\Dating.Domain\Dating.Domain.csproj" />
     <ProjectReference Include="..\Dating.Common\Dating.Common.csproj" />
+    <ProjectReference Include="..\Dating.Extension\Dating.Extension.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
