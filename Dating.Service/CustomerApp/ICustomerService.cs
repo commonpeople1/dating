@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Dating.Domain;
-using Dating.Service.BaseTag;
 using Dating.Service.CustomerApp.Dto;
 
 namespace Dating.Service.CustomerApp

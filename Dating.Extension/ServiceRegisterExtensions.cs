@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 using Dating.Service;
 using Dating.Service.CustomerApp;
-using Dating.Service.BaseTag;
 using Microsoft.Extensions.DependencyInjection;
+using Dating.Domain;
 
 namespace Dating.Extension
 {
