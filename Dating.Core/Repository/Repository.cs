@@ -85,6 +85,12 @@ namespace Dating.Core.Repository
             var dbSet = _context.Set<TEntity>();
             return await dbSet.FirstOrDefaultAsync(predicate);
         }
+        public async Task<List<TProjection>> GetProjectionAsync<TProjection>(Expression<Func<TEntity, TProjection>> projectionExpression)
+        {
+            return _context.Set<TEntity>()
+                .Select(projectionExpression)
+                .ToList();
+        }
         public TEntity Insert(TEntity entity)
         {
             var dbSet = _context.Set<TEntity>();

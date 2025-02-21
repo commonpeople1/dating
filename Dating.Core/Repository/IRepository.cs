@@ -22,6 +22,7 @@ namespace Dating.Core.Repository
         Task<List<TEntity>> GetListAsync(PageWithSort pageWithSort);
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, string sort, int pageIndex, int pageSize);
+        Task<List<TProjection>> GetProjectionAsync<TProjection>(Expression<Func<TEntity, TProjection>> projectionExpression);
         IQueryable<TEntity> GetQueryable();
         TEntity Insert(TEntity entity);
         Task<TEntity> InsertAsync(TEntity entity);

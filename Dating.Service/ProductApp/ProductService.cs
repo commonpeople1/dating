@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -46,6 +47,11 @@ namespace Dating.Service.ProductApp
             });
             return dtos;
 
+        }
+        public async Task<IEnumerable<TProjection>> GetProjectionList<TProjection>(Expression<Func<Product, TProjection>> projectionExpression)
+        {
+            var projections = await _productRepo.GetProjectionAsync(projectionExpression);
+            return projections;
         }
     }
 }
