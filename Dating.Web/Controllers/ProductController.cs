@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Dating.Core.Global;
 using Dating.Service.ProductApp;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -21,10 +22,10 @@ namespace Dating.Web.Controllers
         {
             _productService = productService;
         }
-        [HttpGet]
-        public async Task<IActionResult> GetProductDto()
+        [HttpPost]
+        public async Task<IActionResult> GetProductDto(PageWithSort pageWithSort)
         {
-            var products = await _productService.GetProductDto();
+            var products = await _productService.GetProductDto(pageWithSort);
             return Ok(products);
         }
     }

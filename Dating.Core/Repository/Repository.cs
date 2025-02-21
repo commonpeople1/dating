@@ -5,9 +5,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Dating.Core.Core;
+using Dating.Core.Global;
 using Dating.Domain;
-
+using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 namespace Dating.Core.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity>
@@ -29,16 +31,28 @@ namespace Dating.Core.Repository
             var dbSet = _context.Set<TEntity>();
             return dbSet.Where(predicate).ToList();
         }
-        // public async Task<List<TEntity>> GetListAsync(PageWithSortDto pageWithSortDto)
-        // {
-        //     int skip = (pageWithSortDto.PageIndex - 1) * pageWithSortDto.PageSize;
-        //     var dbSet = _context.Set<TEntity>();
-        //     if (pageWithSortDto.OrderType == OrderType.Asc)
-        //         return await dbSet.OrderBy(pageWithSortDto.Sort).Skip(skip).Take(pageWithSortDto.PageSize).ToListAsync();
-        //     else
-        //         return await dbSet.OrderByDescending(pageWithSortDto.Sort).Skip(skip).Take(pageWithSortDto.PageSize).ToListAsync();
+        public async Task<List<TEntity>> GetListAsync(PageWithSort pageWithSort)
+        {
+            int skip = (pageWithSort.PageIndex - 1) * pageWithSort.PageSize;
+            var query = _context.Set<TEntity>().AsQueryable();
 
-        // }
+            if (!string.IsNullOrWhiteSpace(pageWithSort.Sort))
+            {
+                // 校验排序字段是否存在
+                if (!IsValidSortField(pageWithSort.Sort))
+                {
+                    throw new ArgumentException($"无效排序字段: {pageWithSort.Sort}");
+                }
+
+                string orderDirection = pageWithSort.OrderType == OrderType.Asc ? "asc" : "desc";
+                query = query.OrderBy($"{pageWithSort.Sort} {orderDirection}");
+            }
+
+            return await query.Skip(skip)
+                             .Take(pageWithSort.PageSize)
+                             .ToListAsync();
+
+        }
         public IQueryable<TEntity> GetQueryable()
         {
             var dbSet = _context.Set<TEntity>();
@@ -115,7 +129,30 @@ namespace Dating.Core.Repository
             await _context.SaveChangesAsync();
             return res;
         }
+        private bool IsValidSortField(string sortExpression)
+        {
+            var entityType = typeof(TEntity);
 
+            // 支持嵌套属性（如 "Address.City"）
+            var properties = sortExpression.Split('.');
+
+            PropertyInfo propertyInfo = null;
+            Type currentType = entityType;
+
+            foreach (var prop in properties)
+            {
+                propertyInfo = currentType.GetProperty(prop,
+                    BindingFlags.IgnoreCase |  // 是否忽略大小写
+                    BindingFlags.Public |
+                    BindingFlags.Instance);
+
+                if (propertyInfo == null) return false;
+
+                currentType = propertyInfo.PropertyType;
+            }
+
+            return true;
+        }
 
     }
 }

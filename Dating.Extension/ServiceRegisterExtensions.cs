@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 using Dating.Service;
 using Dating.Service.CustomerApp;
+using Dating.Service.Global;
+
 using Microsoft.Extensions.DependencyInjection;
-using Dating.Domain;
+//using Dating.Domain;
 
 namespace Dating.Extension
 {

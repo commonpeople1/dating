@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Dating.Domain;
 using Dating.Service.CustomerApp.Dto;
+using Dating.Service.Global;
 
 namespace Dating.Service.CustomerApp
 {

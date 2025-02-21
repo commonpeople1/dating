@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+using Dating.Core.Global;
 using Dating.Domain;
 
 namespace Dating.Core.Repository
@@ -18,6 +19,7 @@ namespace Dating.Core.Repository
         List<TEntity> GetList(Func<TEntity, bool> predicate);
         // Task<List<TEntity>> GetListAsync(PageWithSortDto pageWithSortDto);
         Task<List<TEntity>> GetListAsync();
+        Task<List<TEntity>> GetListAsync(PageWithSort pageWithSort);
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, string sort, int pageIndex, int pageSize);
         IQueryable<TEntity> GetQueryable();
