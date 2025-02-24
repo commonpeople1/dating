@@ -7,6 +7,7 @@ using AutoMapper;
 
 using Dating.Domain;
 using Dating.Service.ProductApp.Dto;
+using Dating.Service.ShoppingCartApp.Dto;
 
 namespace Dating.Service
 {
@@ -18,6 +19,8 @@ namespace Dating.Service
             CreateMap<ProductSale, ProductDto>().ForMember(dest => dest.Id, opt => opt.Ignore()).ReverseMap();
             CreateMap<ProductPhoto, ProductDto>().ForMember(dest => dest.Id, opt => opt.Ignore()).ReverseMap();
             CreateMap<ProductSaleAreaDiff, ProductDto>().ForMember(dest => dest.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<ShoppingCart, ShoppingCartInputDto>().ReverseMap();
+            CreateMap<ShoppingCart, ShoppingCartDto>().ReverseMap();
 
         }
     }
