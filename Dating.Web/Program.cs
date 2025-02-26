@@ -17,8 +17,19 @@ builder.Services.AddDbContext<DatingDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
 });
-var token = builder.Configuration.GetSection("Jwt").Get<JwtTokenModel>();
+#region 增加跨域请求配置
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", builder =>
+    {
+        builder.WithOrigins("https://localhost:8080", "http://localhost:8080")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+#endregion
 #region Jwt验证
+var token = builder.Configuration.GetSection("Jwt").Get<JwtTokenModel>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(opt =>
 {
@@ -61,6 +72,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 });
 #endregion
 builder.Services.AddControllers();
+#region Swagger配置
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -95,6 +107,7 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 });
+#endregion
 builder.Services.RepositoryRegister();
 builder.Services.ServiceRegister();
 builder.Services.AddAutoMapper(typeof(DatingPlatformProfile));
@@ -107,7 +120,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowSpecificOrigins");
 app.UseHttpsRedirection();
 app.UseRouting();
 app.MapControllers();

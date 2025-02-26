@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
+using Dating.Common.EventBus;
 using Dating.Service;
 using Dating.Service.CustomerApp;
 using Dating.Service.Global;
@@ -40,7 +41,7 @@ namespace Dating.Extension
                     services.AddTransient(interfaceType, implementationType);
                 }
             }
-
+            services.AddScoped(typeof(EventBus));
             return services;
         }
     }
